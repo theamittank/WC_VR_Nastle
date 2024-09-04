@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using Unity.VisualScripting;
+using UnityEngine.UIElements;
 namespace OculusSampleFramework {
     [Serializable]
     public class RecipeCoreClass {
@@ -41,6 +42,9 @@ namespace OculusSampleFramework {
         [Header("CurrentDragableObject")]
         public GameObject currentDragableObject;
 
+        [Header("Particals List")]
+        public List<GameObject> allTheParticals = new List<GameObject>();
+
         private void Awake() {
             instance = this;
             finalBowl.SetActive(false);
@@ -65,33 +69,33 @@ namespace OculusSampleFramework {
         }
 
         public void OnGameStart() {
+            if (string.Equals(stringSubCategory, "Chocolate Cake")) {
+                totalNumberOfCollections = 9;
+                allSubProducts[0].gameObject.SetActive(true);
+            }
+            if (string.Equals(stringSubCategory, "Chocolate Truffles")) {
+                totalNumberOfCollections = 2;
+                allSubProducts[1].gameObject.SetActive(true);
+            }
+            if (string.Equals(stringSubCategory, "Mawa Modak")) {
+                totalNumberOfCollections = 5;
+                allSubProducts[2].gameObject.SetActive(true);
+            }
+            if (string.Equals(stringSubCategory, "Rice Kheer")) {
+                totalNumberOfCollections = 5;
+                allSubProducts[3].gameObject.SetActive(true);
+            }
+            if (string.Equals(stringSubCategory, "Pancake")) {
+                totalNumberOfCollections = 12;
+                allSubProducts[4].gameObject.SetActive(true);
+            }
+            if (string.Equals(stringSubCategory, "Summer Fruit Delight")) {
+                totalNumberOfCollections = 7;
+                allSubProducts[5].gameObject.SetActive(true);
+            }
             isGameStart = true;
             isGameEnd = false;
             finalBowl.SetActive(true);
-            if (stringSubCategory == "Chocolate Cake") {
-                allSubProducts[0].gameObject.SetActive(true);
-                totalNumberOfCollections = 9;
-            }
-            if (stringSubCategory == "Chocolate Truffles") {
-                allSubProducts[1].gameObject.SetActive(true);
-                totalNumberOfCollections = 2;
-            }
-            if (stringSubCategory == "Mawa Modak") {
-                allSubProducts[2].gameObject.SetActive(true);
-                totalNumberOfCollections = 5;
-            }
-            if (stringSubCategory == "Rice Kheer") {
-                allSubProducts[3].gameObject.SetActive(true);
-                totalNumberOfCollections = 5;
-            }
-            if (stringSubCategory == "Pancake") {
-                allSubProducts[4].gameObject.SetActive(true);
-                totalNumberOfCollections = 12;
-            }
-            if (stringSubCategory == "Summer Fruit Delight") {
-                allSubProducts[5].gameObject.SetActive(true);
-                totalNumberOfCollections = 7;
-            }
         }
 
         public void SetDragableObjectIntoBowl() {
@@ -105,15 +109,18 @@ namespace OculusSampleFramework {
 
 
         public void OnGameEnd() {
+
             for (int i = 0; i < finalProducts.Count; i++) { finalProducts[i].gameObject.SetActive(false); }
             for (int i = 0; i < allSubProducts.Count; i++) { allSubProducts[i].gameObject.SetActive(false); }
 
-            if (stringSubCategory == "Chocolate Cake") { finalProducts[0].gameObject.SetActive(true); }
-            if (stringSubCategory == "Chocolate Truffles") { finalProducts[1].gameObject.SetActive(true); }
-            if (stringSubCategory == "Mawa Modak") { finalProducts[2].gameObject.SetActive(true); }
-            if (stringSubCategory == "Rice Kheer") { finalProducts[3].gameObject.SetActive(true); }
-            if (stringSubCategory == "Pancake") { finalProducts[4].gameObject.SetActive(true); }
-            if (stringSubCategory == "Summer Fruit Delight") { finalProducts[5].gameObject.SetActive(true); }
+            if (string.Equals(stringSubCategory, "Chocolate Cake")) { finalProducts[0].gameObject.SetActive(true); }
+            if (string.Equals(stringSubCategory, "Chocolate Truffles")) { finalProducts[1].gameObject.SetActive(true); }
+            if (string.Equals(stringSubCategory, "Mawa Modak")) { finalProducts[2].gameObject.SetActive(true); }
+            if (string.Equals(stringSubCategory, "Rice Kheer")) { finalProducts[3].gameObject.SetActive(true); }
+            if (string.Equals(stringSubCategory, "Pancake")) { finalProducts[4].gameObject.SetActive(true); }
+            if (string.Equals(stringSubCategory, "Summer Fruit Delight")) { finalProducts[5].gameObject.SetActive(true); }
+
+            
         }
     }
 }

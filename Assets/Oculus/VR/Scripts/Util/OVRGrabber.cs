@@ -326,7 +326,7 @@ public class OVRGrabber : MonoBehaviour {
                 position = m_anchorOffsetPosition,
                 orientation = m_anchorOffsetRotation
             };
-            Debug.LogError("Test");
+            //Debug.LogError("Test");
             currentDragableObject = m_grabbedObj.transform.gameObject;
             isdrop = true;
             localPose = localPose * offsetPose;

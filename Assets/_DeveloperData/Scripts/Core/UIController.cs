@@ -85,6 +85,7 @@ namespace OculusSampleFramework {
         }
 
         public void OnClickSelectSubCategory(string _subcategory) {
+            GameManager.instance.stringSubCategory = _subcategory;
             currentSubCategoryPanel.transform.DOScale(Vector3.zero, 0.5f).SetEase(Ease.InBounce).OnComplete(() => {
                 currentSubCategoryPanel.SetActive(false);
                 instructionPanel.SetActive(true);
@@ -101,12 +102,15 @@ namespace OculusSampleFramework {
         }
 
         public void OnGameEnd() {
+
             laserPointer.SetActive(true);
             gameOverPanel.SetActive(true);
             GameManager.instance.finalBowl.SetActive(false);
-            GameManager.instance.finalProducts[0].gameObject.SetActive(true);
             GameManager.instance.isGameEnd = true;
             GameManager.instance.isGameStart = false;
+            for (int i = 0; i < GameManager.instance.allTheParticals.Count; i++) {
+                GameManager.instance.allTheParticals[i].gameObject.SetActive(true);
+            }
             gameOverPanel.transform.DOScale(Vector3.one, 0.5f).SetDelay(2).SetEase(Ease.OutBounce).OnComplete(() => GameManager.instance.OnGameEnd());
         }
 
