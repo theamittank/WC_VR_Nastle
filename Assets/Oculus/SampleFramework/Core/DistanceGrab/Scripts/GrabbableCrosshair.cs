@@ -21,12 +21,9 @@
 using UnityEngine;
 using System.Collections;
 
-namespace OculusSampleFramework
-{
-    public class GrabbableCrosshair : MonoBehaviour
-    {
-        public enum CrosshairState
-        {
+namespace OculusSampleFramework {
+    public class GrabbableCrosshair : MonoBehaviour {
+        public enum CrosshairState {
             Disabled,
             Enabled,
             Targeted
@@ -41,35 +38,26 @@ namespace OculusSampleFramework
         [SerializeField]
         GameObject m_enabledCrosshair = null;
 
-        private void Start()
-        {
+        private void Start() {
             m_centerEyeAnchor = GameObject.Find("CenterEyeAnchor").transform;
         }
 
-        public void SetState(CrosshairState cs)
-        {
+        public void SetState(CrosshairState cs) {
             m_state = cs;
-            if (cs == CrosshairState.Disabled)
-            {
+            if (cs == CrosshairState.Disabled) {
                 m_targetedCrosshair.SetActive(false);
                 m_enabledCrosshair.SetActive(false);
-            }
-            else if (cs == CrosshairState.Enabled)
-            {
+            } else if (cs == CrosshairState.Enabled) {
                 m_targetedCrosshair.SetActive(false);
                 m_enabledCrosshair.SetActive(true);
-            }
-            else if (cs == CrosshairState.Targeted)
-            {
+            } else if (cs == CrosshairState.Targeted) {
                 m_targetedCrosshair.SetActive(true);
                 m_enabledCrosshair.SetActive(false);
             }
         }
 
-        private void Update()
-        {
-            if (m_state != CrosshairState.Disabled)
-            {
+        private void Update() {
+            if (m_state != CrosshairState.Disabled) {
                 transform.LookAt(m_centerEyeAnchor);
             }
         }

@@ -4,7 +4,6 @@ using DG;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
-using UnityEditor.SearchService;
 using UnityEngine.SceneManagement;
 
 
@@ -104,11 +103,15 @@ public class UIController : MonoBehaviour {
     public void OnGameEnd() {
         laserPointer.SetActive(true);
         gameOverPanel.SetActive(true);
-        gameOverPanel.transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBounce).OnComplete(() => GameManager.instance.OnGameEnd());
+        GameManager.instance.finalBowl.SetActive(true);
+        GameManager.instance.finalProducts[0].gameObject.SetActive(true);
+        GameManager.instance.isGameEnd = true;
+        GameManager.instance.isGameStart = false;
+        gameOverPanel.transform.DOScale(Vector3.one, 0.5f).SetDelay(2).SetEase(Ease.OutBounce).OnComplete(() => GameManager.instance.OnGameEnd());
     }
 
     public void OnRestartGame() {
-        gameOverPanel.transform.DOScale(Vector3.zero, 0.5f).SetEase(Ease.InBounce).OnComplete(() => {
+        gameOverPanel.transform.DOScale(Vector3.zero, 0.5f).SetDelay(2).SetEase(Ease.InBounce).OnComplete(() => {
             gameOverPanel.SetActive(false);
             SceneManager.LoadScene("CoreScene");
         });

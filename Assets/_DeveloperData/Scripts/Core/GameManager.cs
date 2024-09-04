@@ -32,8 +32,21 @@ public class GameManager : MonoBehaviour {
     [Header("AllSubProduct")]
     public List<GameObject> allSubProducts = new List<GameObject>();
 
+    [Header("FinalBowl")]
+    public GameObject finalBowl;
+
+    [Header("CollectionCounter")]
+    public int totalNumberOfCollections;
+    public int currentCollections;
+
+    [Header("CoreObject")]
+    public bool isGameStart;
+    public bool isGameEnd;
+
     private void Awake() {
         instance = this;
+        finalBowl.SetActive(false);
+        totalNumberOfCollections = 10;
         for (int i = 0; i < finalProducts.Count; i++) {
             finalProducts[i].gameObject.SetActive(false);
         }
@@ -42,13 +55,20 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+
+    private void Update() {
+        if (isGameStart && !isGameEnd) {
+            if (currentCollections >= totalNumberOfCollections) {
+                UIController.instance.OnGameEnd();
+            }
+        }
+    }
+
     public void OnGameStart() {
-        for (int i = 0; i < finalProducts.Count; i++) {
-            finalProducts[i].gameObject.SetActive(false);
-        }
-        for (int i = 0; i < allSubProducts.Count; i++) {
-            allSubProducts[i].gameObject.SetActive(false);
-        }
+        isGameStart = true;
+        isGameEnd = false;
+        finalBowl.SetActive(true);
+        allSubProducts[0].gameObject.SetActive(true);
     }
 
     public void OnGameEnd() {
