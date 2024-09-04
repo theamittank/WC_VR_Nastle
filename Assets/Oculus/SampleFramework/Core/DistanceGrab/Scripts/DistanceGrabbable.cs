@@ -26,12 +26,10 @@ using OVRTouchSample;
 namespace OculusSampleFramework {
     public class DistanceGrabbable : OVRGrabbable {
         public string m_materialColorField;
-
         GrabbableCrosshair m_crosshair;
         GrabManager m_crosshairManager;
         Renderer m_renderer;
         MaterialPropertyBlock m_mpb;
-
 
         public bool InRange {
             get { return m_inRange; }
@@ -68,10 +66,7 @@ namespace OculusSampleFramework {
             if (m_crosshair) {
                 if (isGrabbed) {
                     m_crosshair.SetState(GrabbableCrosshair.CrosshairState.Disabled);
-                    transform.GetComponent<Rigidbody>().isKinematic = true;
-                    transform.parent = GameManager.instance.finalBowl.gameObject.transform;
-                    transform.localScale = new Vector3(0.0001f, 0.0001f, 0.0001f);
-                    transform.localPosition = new Vector3(0, 0, 0);
+                    //GameManager.instance.currentDragableObject = this.gameObject;
                 } else if (!InRange) {
                     m_crosshair.SetState(GrabbableCrosshair.CrosshairState.Disabled);
                 } else {
@@ -91,4 +86,5 @@ namespace OculusSampleFramework {
             }
         }
     }
+
 }

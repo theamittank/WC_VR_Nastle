@@ -72,7 +72,6 @@ namespace OculusSampleFramework {
             DistanceGrabbable dg = otherCollider.GetComponentInChildren<DistanceGrabbable>();
             if (dg) {
                 dg.InRange = false;
-                GameManager.instance.currentCollections++;
             }
         }
     }
